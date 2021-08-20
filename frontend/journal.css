@@ -4,7 +4,7 @@ body {font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;}
 
 body {overflow: hidden;}
 
-/* .centerer {width: 100%; height: 100%; position: absolute;} */
+/* .centerer {width: 100%; height: 568px; position: relative; display: block;} */
 
 .right {text-align: right;}
 
@@ -30,7 +30,7 @@ big {font-size: 2.6em; height: 0.5em; display: inline; float:left; margin-right:
 .front-page .date-price {line-height: 1.8;}
 .front-page .date-price > span {right: 1.25em; position: absolute;}
 
-.front-page .image {background-image: url('assets/eye.png'); width: 100%; height: 12.5em; background-size: contain; background-repeat: no-repeat; background-position: center; filter: grayscale(1) saturate(100%) contrast(200%); mix-blend-mode: multiply; z-index: 2; animation: blink 12s -3s infinite ease-in-out; margin-top: -20px;
+.front-page .image {background-image: url('assets/eye.png'); width: 100%; height: 12.5em; background-size: contain; background-repeat: no-repeat; background-position: center; filter: grayscale(1) saturate(100%) contrast(200%); mix-blend-mode: multiply; z-index: 2; animation: blink 12s -3s infinite ease-in-out; margin-top: -2em;
 /* filter: drop-shadow(0 50px 20px black); */
 }
 @keyframes blink {
@@ -38,12 +38,12 @@ big {font-size: 2.6em; height: 0.5em; display: inline; float:left; margin-right:
   47.5%, 92.5%, 97.5% {transform: scaleY(0);}
 }
 
-.front-page .eye-shadow {height: 2.5em; width: 9.6875em;  border-radius: 50%;  top: -6.25em; position: relative; z-index: 0;
+.front-page .eye-shadow {height: 2.5em; width: 9.6875em;  border-radius: 50%;  top: -6.75em; position: relative; z-index: 0;
   box-shadow: 0px 6.25em 1.25em black; margin: auto;
   /* filter: drop-shadow(0 0 20px black);  */
   background-color: transparent;}
 
-.front-page .recent-posts {text-align: center; margin-top: 1em;}
+.front-page .recent-posts {text-align: center; margin-top: 0.5em;}
 
 /* FRONTISPIECE */
 
@@ -109,6 +109,10 @@ p.peace {text-align: center; font-size: 2em; filter: grayscale(1) saturate(100%)
 
 body {margin: 0px;}
 main.viewer {margin: 20px; height: calc(100% - 2.5em); width: calc(100% - 2.5em); position: absolute; display: block; }
+
+@media screen and (min-height:700px) {
+  main.viewer {margin: 50px 20px; height: calc(100% - 5em);}
+}
 
 .journal-container {height: 580px;  display: inline-block; position: relative; left:-25%; }
 

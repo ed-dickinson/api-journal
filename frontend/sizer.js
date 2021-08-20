@@ -3,6 +3,7 @@ const titleX = title.offsetWidth;
 // console.log(titleX);
 
 const journalCont = document.querySelector('.journal-container');
+const viewer = document.querySelector('main');
 
 let height = 0;
 let width = 0;
@@ -11,16 +12,26 @@ if (window.innerWidth >= window.innerHeight) {
 
   journalCont.style.width = (journalCont.offsetHeight * (3/4)) * 2 + 'px';
   if ((window.innerWidth - 40) < (window.innerHeight - 40) * (8/6)) {
-    //space sides
+    //center vert
 
     journalCont.style.width = '100%';
-    journalCont.style.height = journalCont.offsetWidth * (6/8) + 'px';
+    height = journalCont.offsetWidth * (6/8);
+    journalCont.style.height = height + 'px';
+    viewer.style.height = height + 'px';
+    viewer.style.marginLeft = '20px';
+    viewer.style.marginTop = ((window.innerHeight - height) / 2) + 'px';
   } else {
-    //space tops
+    //center horizontal
     journalCont.style.height = '100%';
-    journalCont.style.width = journalCont.offsetHeight * (8/6) + 'px';
+    width = journalCont.offsetHeight * (8/6);
+    journalCont.style.width = width + 'px';
+    viewer.style.width = width + 'px';
+    // viewer.style.marginTop = '20px';
+    viewer.style.marginLeft = ((window.innerWidth - width) / 2) + 'px';
   }
-  document.querySelector('main').style.fontSize = journalCont.offsetHeight / 35 + 'px';
+  viewer.style.fontSize = journalCont.offsetHeight / 35 + 'px';
+  // console.log(journalCont.offsetHeight);
+
 }
 
 // title.children[1].style.fontSize =
