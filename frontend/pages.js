@@ -44,9 +44,9 @@ async function putIssue(directory, issue, page, rL) {
 
     console.log(page.title.offsetWidth + '/' + page.title.children[0].offsetWidth);
     page.date.innerHTML = result.date;
-    page.body.innerHTML = result.content;
+    page.body.innerHTML = '<big>' + result.content.substr(0,1) + '</big>' + result.content.substr(1);
     pagesArray.push(page.dom);
-    page.title.children[0].style.fontSize = (page.title.offsetWidth / page.title.children[0].offsetWidth) * page.title.offsetWidth * 0.023 + 'px';
+    page.title.children[0].style.fontSize = (page.title.offsetWidth / page.title.children[0].offsetWidth) * page.title.offsetWidth * 0.024 + 'px';
 
   } catch (err) {
     console.log(err);
@@ -57,7 +57,7 @@ async function putIssue(directory, issue, page, rL) {
 
     // if no pages load
     if (issue == 1) {
-      document.querySelector('.backtispiece').children[0].children[0].innerHTML = "Something has gone drastically wrong here.<br><br>All the pages seem to be missing from the database.<br><br>Try reloading, and if that don't work, then...  I don't know...  it's a one way ticket to Shrug City, I guess."; 
+      document.querySelector('.backtispiece').children[0].children[0].innerHTML = "Something has gone drastically wrong here.<br><br>All the pages seem to be missing from the database.<br><br>Try reloading, and if that don't work, then...  I don't know...  it's a one way ticket to Shrug City, I guess.";
     }
 
     if (rL == 'left') {

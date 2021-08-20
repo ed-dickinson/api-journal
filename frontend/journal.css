@@ -1,10 +1,14 @@
+
+
 body {font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;}
 
 body {overflow: hidden;}
 
+/* .centerer {width: 100%; height: 100%; position: absolute;} */
+
 .right {text-align: right;}
 
-big {font-size: 2.6em; height: 0.5em; display: inline; float:left; margin-right: 0.15em; top: -0.15em; position: relative;}
+big {font-size: 2.6em; height: 0.5em; display: inline; float:left; margin-right: 0.15em; top: -0.15em; position: relative; font-family: 'Georgia', cursive; top: -0.12em; font-size: 2.7em;}
 
 .content {margin: 1.25em;}
 
@@ -56,7 +60,6 @@ big {font-size: 2.6em; height: 0.5em; display: inline; float:left; margin-right:
 .frontispiece .content {margin-top: 5em;}
 
 /* ALL PAGES */
-.inner-pages .inner-page .content .date {text-align: right;}
 
 .right-page, .backtispiece {background-image:
 linear-gradient(to left, rgba(0,0,0,0) 94%, rgba(0,0,0,0.1) 99%, rgba(0,0,0,0.2) 99.5%, rgba(0,0,0,0.5));}
@@ -65,9 +68,10 @@ linear-gradient(to right, rgba(0,0,0,0) 94%, rgba(0,0,0,0.1) 99%, rgba(0,0,0,0.2
 
 /* INNER PAGES */
 
-.inner-page .content .date {font-size: 0.825em;}
 
-.inner-page .content .title {font-size: 0.5em; border-bottom: 1px solid black; margin-bottom: 1em; font-family: 'Georgia', serif ; margin-top: 1em; text-align: center;}
+.inner-page .content .date {text-align: right; font-size: 0.825em;}
+
+.inner-page .content .title {font-size: 0.5em; border-bottom: 1px solid black; margin-bottom: 2em; font-family: 'Georgia', serif ; margin-top: 1em; text-align: center; white-space: pre;}
 
 .inner-page .content .title-emoji {filter: grayscale(1) saturate(100%) contrast(110%) brightness(110%);}
 .inner-page .content .title-emoji:nth-of-type(2) {transform: scaleX(-1); display: inline-block;}
@@ -94,3 +98,116 @@ p.peace {text-align: center; font-size: 2em; filter: grayscale(1) saturate(100%)
 .back-page .sticker span:nth-of-type(1) {font-size: 0.675em; display: block; padding: 1.5em 3em; }
 .back-page .sticker span:nth-of-type(2) {font-size: 3em; display: block; margin-top: -0em; font-weight: 900; letter-spacing: -0.05em;}
 .back-page .sticker span:nth-of-type(3) {font-size: 1.2em; display: block; line-height: 0.675;}
+
+
+
+
+
+
+
+/* ANIMATION STUFF ^^^^^^^^^^^^^^^^ */
+
+body {margin: 0px;}
+main.viewer {margin: 20px; height: calc(100% - 2.5em); width: calc(100% - 2.5em); position: absolute; display: block; }
+
+.journal-container {height: 580px;  display: inline-block; position: relative; left:-25%; }
+
+.journal-container.open {
+  /* height: 100%;  */
+}
+.journal-container.closed {
+  /* height: 100%;  */
+}
+
+.open-book-event, .unopen-book-event, .close-book-event, .unclose-book-event {
+  animation-timing-function: ease-in-out; animation-fill-mode: forwards;
+}
+.open-book-event {
+  animation: openBook 0.5s 0s ease-in-out; animation-fill-mode: forwards;
+}
+.unopen-book-event {
+  animation: unopenBook 1s 0s ease-in-out; animation-fill-mode: forwards;
+}
+.close-book-event {
+  animation: closeBook 0.5s 0s ease-in-out;animation-fill-mode: forwards;
+}
+.unclose-book-event {
+  animation: uncloseBook 1s 0s ease-in-out;animation-fill-mode: forwards;
+}
+
+@keyframes openBook {
+  0% { left: -25%;}
+  100% { left: 0%;}
+}
+@keyframes unopenBook {
+  0% { left: 0%;}
+  100% { left: -25%;}
+}
+@keyframes closeBook {
+  0% { left: 0%;}
+  100% { left: 25%;}
+}
+@keyframes uncloseBook {
+  0% { left: 25%;}
+  100% { left: 0%;}
+}
+
+.inner-page { background-color: white;}
+.inner-page, .front-page, .frontispiece, .backtispiece, .back-page {box-shadow: 0px 0px 2px black;}
+
+.inner-page .page-no {position: absolute; bottom: 1em; text-align: center; display: block; left: calc(50% - 0.5ch); font-size: 0.75em;}
+
+.front-page { border-left: 0px solid black; height: 100%; width: 50%; background-color: gold; position: absolute; transform: scaleX(1); left: 50%; z-index: 999;}
+
+.right-page {left: 50%;}
+.left-page {right: 50%; transform: scaleX(0); }
+
+/* .finished .spine {position: absolute; width: calc(1.25em + 1px); height: calc(100% + 2px); left: 50%; z-index: -1; background-color: black; box-shadow: 0px 0px 2px black; top: -1px;}
+
+.closed .spine {position: absolute; width: calc(1.25em + 1px); height: calc(100% + 2px); left: calc(50% - 1.25em - 1px);z-index: -1; background-color: black; box-shadow: 0px 0px 2px black; top: -1px;} */
+
+.frontispiece, .back-page {height: 100%; width: 50%; background-color: gold; position: absolute; transform: scaleX(0); right: 50%;}
+
+.backtispiece {height: 100%; left: 50%; width: 50%; background-color: gold; position: absolute;}
+
+
+.turn-page-clicker {position:absolute; height: 100%; width: 50%; top: 0; right: 0; z-index: 1000;}
+.unturn-page-clicker {position:absolute; height: 100%; width: 50%; top: 0; left: 0; z-index: 1000;}
+
+.turn-page-event-1 {
+  animation: turnPage1 0.5s 0s ease-in; animation-fill-mode: forwards;
+}
+.turn-page-event-2 {
+  animation: turnPage2 0.5s 0s ease-out; animation-fill-mode: forwards;
+}
+
+@keyframes turnPage1 {
+  0% {transform: scaleX(1) skewY(0deg) skewX(0deg); left: 50%; top: 0;}
+  100% {transform: scaleX(0) skewY(-6deg) skewX(0deg); left: 25%; top: -3.5%;}
+}
+@keyframes turnPage2 {
+  0% {transform: scaleX(0) skewY(6deg) skewX(0deg); left: 25%; top: -3.5%;}
+  100% {transform: scaleX(1) skewY(0deg) skewX(0deg); left: 0%; top: 0%;}
+}
+
+.unturn-page-event-1 {
+  animation: unturnPage1 0.5s 0s ease-in; animation-fill-mode: forwards;
+}
+.unturn-page-event-2 {
+  animation: unturnPage2 0.5s 0s ease-out; animation-fill-mode: forwards;
+}
+
+@keyframes unturnPage1 {
+  0% {transform: scaleX(1) skewY(0deg); left: 0%; top: 0%;}
+  100% {transform: scaleX(0) skewY(6deg);left: 25%; top: -3.5%;}
+}
+@keyframes unturnPage2 {
+  0% {transform: scaleX(0) skewY(-6deg); left: 25%; top: -3.5%;}
+  100% {transform: scaleX(1) skewY(0deg); left: 50%; top: 0%;}
+}
+
+.inner-pages .right-page {left: 50%; width: 50%; position: absolute; height: 100%;}
+.inner-pages .left-page {right: 50%; width: 50%; position: absolute; height: 100%;}
+
+
+/* ANIMATION STUFF ^^^^^^^^^^^^^ */

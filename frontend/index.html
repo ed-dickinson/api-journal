@@ -10,112 +10,13 @@
 <link rel="icon" href="">
 <link rel='stylesheet' href='/journal.css' />
 <style>
-body {margin: 0px;}
-main.viewer {margin: 20px; height: calc(100% - 2.5em); width: calc(100% - 2.5em); position: absolute;}
 
-.journal-container {height: 580px;  display: inline-block; position: relative; left:-25%; }
-
-.journal-container.open {
-  /* height: 100%;  */
-}
-.journal-container.closed {
-  /* height: 100%;  */
-}
-
-.open-book-event, .unopen-book-event, .close-book-event, .unclose-book-event {
-  animation-timing-function: ease-in-out; animation-fill-mode: forwards;
-}
-.open-book-event {
-  animation: openBook 0.5s 0s ease-in-out; animation-fill-mode: forwards;
-}
-.unopen-book-event {
-  animation: unopenBook 1s 0s ease-in-out; animation-fill-mode: forwards;
-}
-.close-book-event {
-  animation: closeBook 0.5s 0s ease-in-out;animation-fill-mode: forwards;
-}
-.unclose-book-event {
-  animation: uncloseBook 1s 0s ease-in-out;animation-fill-mode: forwards;
-}
-
-@keyframes openBook {
-  0% { left: -25%;}
-  100% { left: 0%;}
-}
-@keyframes unopenBook {
-  0% { left: 0%;}
-  100% { left: -25%;}
-}
-@keyframes closeBook {
-  0% { left: 0%;}
-  100% { left: 25%;}
-}
-@keyframes uncloseBook {
-  0% { left: 25%;}
-  100% { left: 0%;}
-}
-
-.inner-page { background-color: white;}
-.inner-page, .front-page, .frontispiece, .backtispiece, .back-page {box-shadow: 0px 0px 2px black;}
-
-.inner-page .page-no {position: absolute; bottom: 1em; text-align: center; display: block; left: calc(50% - 0.5ch); font-size: 0.75em;}
-
-.front-page { border-left: 0px solid black; height: 100%; width: 50%; background-color: gold; position: absolute; transform: scaleX(1); left: 50%; z-index: 999;}
-
-.right-page {left: 50%;}
-.left-page {right: 50%; transform: scaleX(0); }
-
-/* .finished .spine {position: absolute; width: calc(1.25em + 1px); height: calc(100% + 2px); left: 50%; z-index: -1; background-color: black; box-shadow: 0px 0px 2px black; top: -1px;}
-
-.closed .spine {position: absolute; width: calc(1.25em + 1px); height: calc(100% + 2px); left: calc(50% - 1.25em - 1px);z-index: -1; background-color: black; box-shadow: 0px 0px 2px black; top: -1px;} */
-
-.frontispiece, .back-page {height: 100%; width: 50%; background-color: gold; position: absolute; transform: scaleX(0); right: 50%;}
-
-.backtispiece {height: 100%; left: 50%; width: 50%; background-color: gold; position: absolute;}
-
-
-.turn-page-clicker {position:absolute; height: 100%; width: 50%; top: 0; right: 0; z-index: 1000;}
-.unturn-page-clicker {position:absolute; height: 100%; width: 50%; top: 0; left: 0; z-index: 1000;}
-
-.turn-page-event-1 {
-  animation: turnPage1 0.5s 0s ease-in; animation-fill-mode: forwards;
-}
-.turn-page-event-2 {
-  animation: turnPage2 0.5s 0s ease-out; animation-fill-mode: forwards;
-}
-
-@keyframes turnPage1 {
-  0% {transform: scaleX(1); left: 50%;}
-  100% {transform: scaleX(0); left: 25%;}
-}
-@keyframes turnPage2 {
-  0% {transform: scaleX(0); left: 25%;}
-  100% {transform: scaleX(1); left: 0%;}
-}
-
-.unturn-page-event-1 {
-  animation: unturnPage1 0.5s 0s ease-in; animation-fill-mode: forwards;
-}
-.unturn-page-event-2 {
-  animation: unturnPage2 0.5s 0s ease-out; animation-fill-mode: forwards;
-}
-
-@keyframes unturnPage1 {
-  0% {transform: scaleX(1); left: 0%;}
-  100% {transform: scaleX(0);left: 25%;}
-}
-@keyframes unturnPage2 {
-  0% {transform: scaleX(0); left: 25%;}
-  100% {transform: scaleX(1); left: 50%;}
-}
-
-.inner-pages .right-page {left: 50%; width: 50%; position: absolute; height: 100%;}
-.inner-pages .left-page {right: 50%; width: 50%; position: absolute; height: 100%;}
 </style>
 
 </head>
 <body>
 <main class='viewer'>
+<!-- <div class='centerer'> -->
   <div class='journal-container closed'>
     <div class='spine'></div>
     <div class='front-page'>
@@ -185,10 +86,10 @@ main.viewer {margin: 20px; height: calc(100% - 2.5em); width: calc(100% - 2.5em)
 
   <div class='issue'></div>
 
-  <div class='debug-log' style='font-size: 0.75em;'>debug log:</div>
+  <!-- <div class='debug-log' style='font-size: 0.75em;'>debug log:</div> -->
 
 
-
+<!-- </div> -->
 </main>
 <script src="/sizer.js"></script>
 <script src="/pages.js"></script>

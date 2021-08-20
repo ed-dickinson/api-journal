@@ -10,7 +10,7 @@ if (window.innerWidth >= window.innerHeight) {
   //landscape
 
   journalCont.style.width = (journalCont.offsetHeight * (3/4)) * 2 + 'px';
-  if (window.innerWidth - 40 <= (window.innerHeight * 1.5) - 40) {
+  if ((window.innerWidth - 40) < (window.innerHeight - 40) * (8/6)) {
     //space sides
 
     journalCont.style.width = '100%';
