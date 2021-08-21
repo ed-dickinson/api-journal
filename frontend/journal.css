@@ -4,8 +4,6 @@ body {font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;}
 
 body {overflow: hidden;}
 
-/* .centerer {width: 100%; height: 568px; position: relative; display: block;} */
-
 .right {text-align: right;}
 
 big {font-size: 2.6em; height: 0.5em; display: inline; float:left; margin-right: 0.15em; top: -0.15em; position: relative; font-family: 'Georgia', cursive; top: -0.12em; font-size: 2.7em;}
@@ -13,7 +11,6 @@ big {font-size: 2.6em; height: 0.5em; display: inline; float:left; margin-right:
 .content {margin: 1.25em;}
 
 .front-page:after  {border: 0.5em solid black; position: absolute; width: calc(100% - 1em); height: calc(100% - 1em + 1px); content: ''; top: 0;}
-/* .front-page .content {margin: 0.75em;} */
 
 .front-page .title {font-weight: 900;}
 .front-page .title span:nth-of-type(1) {transform: rotate(270deg); display: inline-block; position: absolute;
@@ -31,7 +28,6 @@ big {font-size: 2.6em; height: 0.5em; display: inline; float:left; margin-right:
 .front-page .date-price > span {right: 1.25em; position: absolute;}
 
 .front-page .image {background-image: url('assets/eye.png'); width: 100%; height: 12.5em; background-size: contain; background-repeat: no-repeat; background-position: center; filter: grayscale(1) saturate(100%) contrast(200%); mix-blend-mode: multiply; z-index: 2; animation: blink 12s -3s infinite ease-in-out; margin-top: -2em;
-/* filter: drop-shadow(0 50px 20px black); */
 }
 @keyframes blink {
   0%, 45%, 50%, 90%, 95%, 100% {transform: scaleY(1);}
@@ -80,6 +76,8 @@ linear-gradient(to right, rgba(0,0,0,0) 94%, rgba(0,0,0,0.1) 99%, rgba(0,0,0,0.2
 
 /* .inner-page .content .body br {content: ' '; display: inline; margin-right: 4ch;height: 0em; width: 100%;} */
 
+.content .peace, .content .shrug {margin-top: 6em;}
+
 /* backtispiece */
 
 .backtispiece .content > div {font-size: 0.875em; border: 1px solid black; padding: 1em; margin: 5em 1em;}
@@ -102,9 +100,6 @@ p.peace {text-align: center; font-size: 2em; filter: grayscale(1) saturate(100%)
 
 
 
-
-
-
 /* ANIMATION STUFF ^^^^^^^^^^^^^^^^ */
 
 body {margin: 0px;}
@@ -115,13 +110,6 @@ main.viewer {margin: 20px; height: calc(100% - 2.5em); width: calc(100% - 2.5em)
 }
 
 .journal-container {height: 580px;  display: inline-block; position: relative; left:-25%; }
-
-.journal-container.open {
-  /* height: 100%;  */
-}
-.journal-container.closed {
-  /* height: 100%;  */
-}
 
 .open-book-event, .unopen-book-event, .close-book-event, .unclose-book-event {
   animation-timing-function: ease-in-out; animation-fill-mode: forwards;
@@ -165,10 +153,6 @@ main.viewer {margin: 20px; height: calc(100% - 2.5em); width: calc(100% - 2.5em)
 
 .right-page {left: 50%;}
 .left-page {right: 50%; transform: scaleX(0); }
-
-/* .finished .spine {position: absolute; width: calc(1.25em + 1px); height: calc(100% + 2px); left: 50%; z-index: -1; background-color: black; box-shadow: 0px 0px 2px black; top: -1px;}
-
-.closed .spine {position: absolute; width: calc(1.25em + 1px); height: calc(100% + 2px); left: calc(50% - 1.25em - 1px);z-index: -1; background-color: black; box-shadow: 0px 0px 2px black; top: -1px;} */
 
 .frontispiece, .back-page {height: 100%; width: 50%; background-color: gold; position: absolute; transform: scaleX(0); right: 50%;}
 
