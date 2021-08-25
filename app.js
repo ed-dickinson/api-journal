@@ -7,9 +7,20 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testRouter = require('./routes/test');
+var issueRouter = require('./routes/issues');
 
 var cors = require('cors');
 var app = express();
+
+require('dotenv').config()
+const DBkey = process.env.DB_URL;
+var mongoose = require('mongoose');
+var dev_db_url = DBkey;
+var mongoDB = process.env.MONGODB_URI || dev_db_url;
+
+mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
 
@@ -28,6 +39,7 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/test', testRouter);
 app.use('/users', usersRouter);
+app.use('/issues', issueRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
