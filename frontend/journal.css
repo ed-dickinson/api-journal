@@ -114,14 +114,14 @@ main.viewer {margin: 20px; height: calc(100% - 2.5em); width: calc(100% - 2.5em)
 .open-book-event, .unopen-book-event, .close-book-event, .unclose-book-event {
   animation-timing-function: ease-in-out; animation-fill-mode: forwards;
 }
-.open-book-event {
-  animation: openBook 0.5s 0s ease-in-out; animation-fill-mode: forwards;
+.open-book-event { /* was 0.5*/
+  animation: openBook 1s 0s ease-in-out; animation-fill-mode: forwards;
 }
 .unopen-book-event {
   animation: unopenBook 1s 0s ease-in-out; animation-fill-mode: forwards;
 }
-.close-book-event {
-  animation: closeBook 0.5s 0s ease-in-out;animation-fill-mode: forwards;
+.close-book-event { /* was 0.5 */
+  animation: closeBook 1s 0s ease-in-out;animation-fill-mode: forwards;
 }
 .unclose-book-event {
   animation: uncloseBook 1s 0s ease-in-out;animation-fill-mode: forwards;
@@ -199,3 +199,30 @@ main.viewer {margin: 20px; height: calc(100% - 2.5em); width: calc(100% - 2.5em)
 
 
 /* ANIMATION STUFF ^^^^^^^^^^^^^ */
+
+/* COMMENTS */
+
+.comments-leaflet {width: 40%; text-align: center; border: 1px solid grey; box-shadow: 0px 0px 3px black; position: absolute;  height: 90%;transition: 1s; background-color: white; background-color: lightblue; z-index: 1000;}
+
+.comments-leaflet.none {opacity: 0;}
+.comments-leaflet {opacity: 1;}
+
+.comments-leaflet.up {top: 5%;}
+.comments-leaflet.down {top: 105%;}
+
+.comments-leaflet.left {left: 5%; transform: rotate(1deg);}
+.comments-leaflet.right {right: 5%; transform: rotate(-0.5deg);}
+
+.comments-arrow {cursor: pointer; margin-top: 0.3em;}
+.comments-arrow.bottom {transform: rotate(180deg); position: absolute; bottom: 0.5em; left: calc(50% - 0.5ch);}
+
+.comments-arrow:hover + .comments-title {opacity: 1;}
+.comments-leaflet.up > .comments-title {opacity: 1;}
+
+.comments-title {font-size: 0.6em; text-transform: uppercase; font-weight: bold; opacity: 0; transition: opacity 0.5s;}
+
+.comments-leaflet .comment {font-size: 0.825em; text-align: left; border-bottom: 1px solid black; margin: 1em; padding-bottom: 0.5em; font-style: italic; font-family: monospace;}
+.comments-leaflet .comment:last-of-type {font-size: 0.785em; text-align: left; border-bottom: 0px solid grey;}
+
+.comments-leaflet .comment .comment-author {font-weight: ; font-style: italic; margin-top: 0.325em;}
+.comments-leaflet .comment .comment-date {text-align: right;}

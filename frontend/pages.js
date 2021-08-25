@@ -23,6 +23,10 @@ const pagesCont = document.querySelector('.inner-pages');
 
 let noMorePages = false;
 
+let commentsArray = [];
+// commentsArray[2] = 'hi';
+// console.log(commentsArray);
+
 
 async function getIssue(directory, issue) {
   let path = 'issues/' + issue;
@@ -43,6 +47,12 @@ async function putIssue(directory, issue, page, rL) {
     page.body.innerHTML = '<big>' + result.content.substr(0,1) + '</big>' + result.content.substr(1);
     pagesArray.push(page.dom);
     page.title.children[0].style.fontSize = (page.title.offsetWidth / page.title.children[0].offsetWidth) * page.title.offsetWidth * 0.024 + 'px';
+    let comments = (typeof result.comments);
+    //puts comment object in index array
+    if (comments == 'object') {
+      commentsArray[pagesArray.indexOf(page.dom)-1] = result.comments;
+    }
+    // console.log(commentsArray);
 
   } catch (err) {
     // console.log(err);
@@ -158,6 +168,37 @@ function turnPage(e) {
     setupPage(pageNo+2); //right
   }
 
+  function fillComments(page) {
+    let commentsBody = document.querySelectorAll('.comments-body')[page % 2];
+    let commentsLeaflet = document.querySelectorAll('.comments-leaflet')[page % 2];
+    commentsBody.innerHTML = '';
+
+    if (commentsArray[page]!=undefined) {
+      commentsArray[page].forEach(comment => {
+        commentsBody.innerHTML += '<div class="comment"><div class="comment-body">' + comment.comment + '</div><div class="comment-author">' + comment.name + '</div><div class="comment-date">' + comment.date + '</div></div>';
+      });
+
+      commentsLeaflet.classList.add('some');
+      commentsLeaflet.classList.remove('none');
+    } else {
+      if (document.querySelectorAll('.comments-leaflet')[page % 2].classList.contains('some')) {
+        commentsLeaflet.classList.remove('some');
+        commentsLeaflet.classList.add('none');
+      }
+    }
+  }
+
+  fillComments(pageNo-1);
+  fillComments(pageNo);
+
+  // if (commentsArray[pageNo]!=undefined) {
+  //   document.querySelector('.comments-body.left').innerHTML = commentsArray
+  // }
+
+  console.log(commentsArray[pageNo-1]);
+  console.log(commentsArray[pageNo]);
+
+
   if (pageNo == pagesArray.length - 1) {
     checkClassAndRemove(journalCont, 'unclose-book-event');
     checkClassAndAdd(journalCont, 'close-book-event');
@@ -202,5 +243,23 @@ function unturnPage(e) {
 
 }
 
+function showComments() {
+  console.log('show');
+  let parent = event.srcElement.parentNode;
+  if (parent.classList.contains('down')) {
+    parent.classList.add('up');
+    parent.classList.remove('down');
+  } else {
+    parent.classList.add('down');
+    parent.classList.remove('up');
+  }
+};
+
 document.querySelector('.turn-page-clicker').addEventListener('click', turnPage);
 document.querySelector('.unturn-page-clicker').addEventListener('click', unturnPage);
+
+// const commentsLeaflets = document.querySelectorAll('.comments-leaflet');
+
+document.querySelectorAll('.comments-arrow').forEach(commentLeaflet => {
+  commentLeaflet.addEventListener('click', showComments);
+});
