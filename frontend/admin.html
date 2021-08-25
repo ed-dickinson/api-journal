@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+<title></title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="Crumb Douglas">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="">
+<link rel='stylesheet' href='journal.css' />
+<style>
+
+</style>
+
+</head>no: Number,
+title: String,
+emoji: String,
+date: Date,
+content: String,
+published: Boolean,
+<body>
+<main class='admin'>
+<!-- <div class='centerer'> -->
+<!-- action="upload()" -->
+    <form
+    action="http://localhost:3000/issues/new"
+    method="POST" class="issue-form" id="write-form">
+
+      <input hidden name="no" type="text" value=""/>
+      <label for="title">Title:</label>
+      <input name="title" type="text" value=""/>
+
+      <label for="emoji">Emoji:</label>
+      <input name="emoji" type="text" value="" maxLength=1/>
+      <textarea name="content" type="textarea" placeholder="" required="true"/></textarea>
+      <label for="published">Publish?</label>
+      <input type="checkbox" name="published">
+
+
+
+      <button class="send-button">Post</button>
+    </form>
+    <button onclick="upload()">fetch</button>
+
+</main>
+<!-- <script src="sizer.js"></script>
+<script src="pages.js"></script> -->
+<script>
+
+const directory = 'http://localhost:3000/issues/new';
+function dom(query) {
+  return document.querySelector(query).value;
+}
+
+function upload() {
+  let data = { no: 8,
+    title: dom('[name=title]'),
+    emoji: dom('[name=emoji]'),
+    content: dom('[name=content]'),
+    published: (dom('[name=published]')=='on' ? true : false)
+  };
+  // console.log(document.querySelector('[name=published]'))
+  // console.log(data);
+  fetch(directory, {
+    method: 'POST', // or 'PUT'
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    mode: 'cors',
+    body: JSON.stringify(data),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
+
+
+</script>
+</body>
+</html>

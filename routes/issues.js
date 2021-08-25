@@ -12,7 +12,7 @@ router.get('/posts', function(req, res, next) {
   res.send('index', { title: 'Summin' });
 });
 
-router.get('/new', issue_controller.new);
+router.post('/new', issue_controller.new);
 
 router.get('/:issue_no', issue_controller.get_issue);
 

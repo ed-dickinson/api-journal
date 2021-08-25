@@ -1,4 +1,4 @@
-const directory = 'http://localhost:3000/test/'; // local test directory
+const directory = 'http://localhost:3000/'; // local test directory
 
 // this is for the front page
 async function recentTitles(directory) {
@@ -133,9 +133,14 @@ function checkClassAndRemove(element, classe){
 }
 
 function fillComments(page) {
-  let commentsBody = document.querySelectorAll('.comments-body')[page % 2];
-  let commentsLeaflet = document.querySelectorAll('.comments-leaflet')[page % 2];
-  commentsBody.innerHTML = '';
+  let odd1 = page % 2;
+  if (odd1 < 0) {odd1+=2;} // sorts out negativity from - page
+
+  let commentsBody = document.querySelectorAll('.comments-body')[odd1];
+  let commentsLeaflet = document.querySelectorAll('.comments-leaflet')[odd1];
+  if (commentsBody!=undefined) {
+    commentsBody.innerHTML = '';
+  }
 
   if (commentsArray[page]!=undefined) {
     commentsArray[page].forEach(comment => {
@@ -145,9 +150,11 @@ function fillComments(page) {
     commentsLeaflet.classList.add('some');
     commentsLeaflet.classList.remove('none');
   } else {
-    if (document.querySelectorAll('.comments-leaflet')[page % 2].classList.contains('some')) {
-      commentsLeaflet.classList.remove('some');
-      commentsLeaflet.classList.add('none');
+    if (commentsLeaflet!=undefined) {
+      if (commentsLeaflet.classList.contains('some')) {
+        commentsLeaflet.classList.remove('some');
+        commentsLeaflet.classList.add('none');
+      }
     }
   }
 }
