@@ -132,6 +132,26 @@ function checkClassAndRemove(element, classe){
     }
 }
 
+function fillComments(page) {
+  let commentsBody = document.querySelectorAll('.comments-body')[page % 2];
+  let commentsLeaflet = document.querySelectorAll('.comments-leaflet')[page % 2];
+  commentsBody.innerHTML = '';
+
+  if (commentsArray[page]!=undefined) {
+    commentsArray[page].forEach(comment => {
+      commentsBody.innerHTML += '<div class="comment"><div class="comment-body">' + comment.comment + '</div><div class="comment-author">' + comment.name + '</div><div class="comment-date">' + comment.date + '</div></div>';
+    });
+
+    commentsLeaflet.classList.add('some');
+    commentsLeaflet.classList.remove('none');
+  } else {
+    if (document.querySelectorAll('.comments-leaflet')[page % 2].classList.contains('some')) {
+      commentsLeaflet.classList.remove('some');
+      commentsLeaflet.classList.add('none');
+    }
+  }
+}
+
 let pageNo = -1;
 function turnPage(e) {
   if (pageNo == -1) {
@@ -168,25 +188,7 @@ function turnPage(e) {
     setupPage(pageNo+2); //right
   }
 
-  function fillComments(page) {
-    let commentsBody = document.querySelectorAll('.comments-body')[page % 2];
-    let commentsLeaflet = document.querySelectorAll('.comments-leaflet')[page % 2];
-    commentsBody.innerHTML = '';
 
-    if (commentsArray[page]!=undefined) {
-      commentsArray[page].forEach(comment => {
-        commentsBody.innerHTML += '<div class="comment"><div class="comment-body">' + comment.comment + '</div><div class="comment-author">' + comment.name + '</div><div class="comment-date">' + comment.date + '</div></div>';
-      });
-
-      commentsLeaflet.classList.add('some');
-      commentsLeaflet.classList.remove('none');
-    } else {
-      if (document.querySelectorAll('.comments-leaflet')[page % 2].classList.contains('some')) {
-        commentsLeaflet.classList.remove('some');
-        commentsLeaflet.classList.add('none');
-      }
-    }
-  }
 
   fillComments(pageNo-1);
   fillComments(pageNo);
@@ -195,8 +197,7 @@ function turnPage(e) {
   //   document.querySelector('.comments-body.left').innerHTML = commentsArray
   // }
 
-  console.log(commentsArray[pageNo-1]);
-  console.log(commentsArray[pageNo]);
+
 
 
   if (pageNo == pagesArray.length - 1) {
@@ -221,6 +222,8 @@ function unturnPage(e) {
     },500);
   }
 
+
+
   pageNo -= 2;
   if (pageNo < -1) {pageNo = -1;}
   let leaf = pagesArray[pageNo+2];
@@ -230,6 +233,9 @@ function unturnPage(e) {
   setTimeout(function(){
     overleaf.classList.add('unturn-page-event-2');
   },500);
+
+  fillComments(pageNo-1);
+  fillComments(pageNo);
 
   if (pageNo == -1) {
     checkClassAndRemove(journalCont, 'open-book-event');
