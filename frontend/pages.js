@@ -2,7 +2,7 @@ const directory = 'http://localhost:3000/'; // local test directory
 
 // this is for the front page
 async function recentTitles(directory) {
-  let path = 'issues';
+  let path = 'issues/recent';
   const response = await fetch(directory + path, {mode: 'cors'});
   const recents = await response.json();
 
@@ -142,21 +142,48 @@ function fillComments(page) {
     commentsBody.innerHTML = '';
   }
 
-  if (commentsArray[page]!=undefined) {
+  if (commentsArray[page]!=undefined) { // fill comments
     commentsArray[page].forEach(comment => {
       commentsBody.innerHTML += '<div class="comment"><div class="comment-body">' + comment.comment + '</div><div class="comment-author">' + comment.name + '</div><div class="comment-date">' + comment.date + '</div></div>';
     });
 
     commentsLeaflet.classList.add('some');
     commentsLeaflet.classList.remove('none');
+    // if (commentsLeaflet.classList.contains('unclickable')) {
+    //   commentsLeaflet.classList.remove('unclickable');
+    // }
+    // if (commentsLeaflet.style.zIndex == -1) {
+    //   commentsLeaflet.style.zIndex = 1000;
+    // }
+    console.log();
   } else {
     if (commentsLeaflet!=undefined) {
       if (commentsLeaflet.classList.contains('some')) {
         commentsLeaflet.classList.remove('some');
         commentsLeaflet.classList.add('none');
       }
+      if (commentsLeaflet.classList.contains('up')) {
+        setTimeout(function(){ //stops immediate disappear
+          if (commentsLeaflet.classList.contains('up')) {
+            commentsLeaflet.classList.remove('up');
+            commentsLeaflet.classList.add('down');
+            // commentsLeaflet.classList.add('unclickable');
+            // commentsLeaflet.style.zIndex = -1;
+          } // this it to get rid of the blocking comemnt slip- could add a class just to zIndex it
+
+        },1000);
+
+      }
     }
   }
+  // } else {
+  //   if (commentsLeaflet!=undefined) {
+  //     if (commentsLeaflet.classList.contains('some')) {
+  //       commentsLeaflet.classList.remove('some');
+  //       commentsLeaflet.classList.add('none');
+  //     }
+  //   }
+  // }
 }
 
 let pageNo = -1;

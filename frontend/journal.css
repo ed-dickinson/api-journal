@@ -202,13 +202,21 @@ main.viewer {margin: 20px; height: calc(100% - 2.5em); width: calc(100% - 2.5em)
 
 /* COMMENTS */
 
-.comments-leaflet {width: 40%; text-align: center; border: 1px solid grey; box-shadow: 0px 0px 3px black; position: absolute;  height: 90%;transition: 1s; background-color: white; background-color: lightblue; z-index: 1000;}
+.comments-leaflet {width: 40%; text-align: center; border: 1px solid grey; box-shadow: 0px 0px 3px black; position: absolute;  height: 90%;transition: 1s; background-color: white; background-color: lightblue; z-index: 1000; }
 
-.comments-leaflet.none {opacity: 0;}
-.comments-leaflet {opacity: 1;}
+.comments-leaflet.unclickable {
+  z-index:-1;
+}
+
+
 
 .comments-leaflet.up {top: 5%;}
 .comments-leaflet.down {top: 105%;}
+
+.comments-leaflet.none {opacity: 0;
+   /* top: 105%; */
+ }
+.comments-leaflet {opacity: 1;}
 
 .comments-leaflet.left {left: 5%; transform: rotate(1deg);}
 .comments-leaflet.right {right: 5%; transform: rotate(-0.5deg);}

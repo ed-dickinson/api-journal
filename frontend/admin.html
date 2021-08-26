@@ -35,6 +35,7 @@ published: Boolean,
       <input name="emoji" type="text" value="" maxLength=1/>
       <textarea name="content" type="textarea" placeholder="" required="true"/></textarea>
       <label for="published">Publish?</label>
+      <!-- <span name="published" class='published-checkbox'></span> -->
       <input type="checkbox" name="published">
 
 
@@ -42,6 +43,7 @@ published: Boolean,
       <button class="send-button">Post</button>
     </form>
     <button onclick="upload()">fetch</button>
+    <button onclick="cl()">console.log</button>
 
 </main>
 <!-- <script src="sizer.js"></script>
@@ -53,12 +55,22 @@ function dom(query) {
   return document.querySelector(query).value;
 }
 
+function cl() {
+  let data = { no: 8,
+    title: dom('[name=title]'),
+    emoji: dom('[name=emoji]'),
+    content: dom('[name=content]'),
+    published: (dom('[name=published]')=='true' ? true : false)
+  };
+  console.log(JSON.stringify(data));
+}
+
 function upload() {
   let data = { no: 8,
     title: dom('[name=title]'),
     emoji: dom('[name=emoji]'),
     content: dom('[name=content]'),
-    published: (dom('[name=published]')=='on' ? true : false)
+    published: (dom('[name=published]')=='true' ? true : false)
   };
   // console.log(document.querySelector('[name=published]'))
   // console.log(data);

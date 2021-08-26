@@ -14,7 +14,11 @@ router.get('/posts', function(req, res, next) {
 
 router.post('/new', issue_controller.new);
 
+router.get('/recent', issue_controller.get_recents);
+
 router.get('/:issue_no', issue_controller.get_issue);
+
+
 
 
 module.exports = router;
