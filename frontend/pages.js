@@ -13,6 +13,8 @@ async function recentTitles(directory) {
       recentPosts.innerHTML += ' &bullet; ';
     }
   })
+  let dateForm = new Date(recents[0].date);
+  document.querySelector('.fp-date').innerHTML = dateForm.toLocaleString('default', { month: 'short' }).toUpperCase() + " '" + dateForm.getYear().toString().substr(1);
 } recentTitles(directory);
 
 //page 1 must be set up so it's there immediately when you turn the front cover
@@ -43,7 +45,8 @@ async function putIssue(directory, issue, page, rL) {
     const result = await response.json();
     page.title.innerHTML = '<span><span class="title-emoji">' + result.emoji + '</span> ' + result.title + ' <span class="title-emoji">' + result.emoji + '</span></span>';
 
-    page.date.innerHTML = result.date;
+    let dateForm = new Date(result.date);
+    page.date.innerHTML = dateForm.toLocaleString('default', { month: 'short' }) + " '" + dateForm.getYear().toString().substr(1);
     page.body.innerHTML = '<big>' + result.content.substr(0,1) + '</big>' + result.content.substr(1);
     pagesArray.push(page.dom);
     page.title.children[0].style.fontSize = (page.title.offsetWidth / page.title.children[0].offsetWidth) * page.title.offsetWidth * 0.024 + 'px';

@@ -43,14 +43,14 @@ let issuesImp = [
               },]
   },
   {
-    id: 4,
+    no: 4,
     title: 'Until You Sit & Ponder What Is Not You',
     emoji: '',
     date: "Aug '21",
     content: "I feel like I am everything, until I think about how little I am. My eyeballs feel like two planets in the front of my skull, my entire existence, my entire experience channelled through them. How could I think any other way? When the world is so complete right there within me. Two times over, even.<br><br>It's only when I think about how much remains outside of them that I realise how wrong I am. I think about it and it's like they start to leak out of me. I imagine them emanating little silver waves into the air. Little shimmers that mark their evaporation right out of me. I can almost watch them go.. until I have no eyes to watch them with. My vision and my concentration go too... off into the oneness.<br><br>...and yet they're still there! And they still feel like the world perched in my skull– the whole of everything balanced on the two little curves of bone that make the base of my eye sockets.",
   },
   {
-    id: 5,
+    no: 5,
     title: 'I Go Into the Ocean...',
     emoji: '🐚',
     date: "Aug '21",
@@ -66,7 +66,7 @@ exports.new = (req, res, next) => {
   //   date: new Date(),
   //   content: 'test content',
   //   published: false
-  let importedIssue = issuesImp[2];
+  let importedIssue = issuesImp[4];
   // let importedIssue = req.body;
   const issue = new Issue({
     no: importedIssue.no,
