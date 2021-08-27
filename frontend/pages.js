@@ -26,8 +26,6 @@ const pagesCont = document.querySelector('.inner-pages');
 let noMorePages = false;
 
 let commentsArray = [];
-// commentsArray[2] = 'hi';
-// console.log(commentsArray);
 
 
 async function getIssue(directory, issue) {
@@ -55,10 +53,10 @@ async function putIssue(directory, issue, page, rL) {
     if (comments == 'object') {
       commentsArray[pagesArray.indexOf(page.dom)-1] = result.comments;
     }
-    // console.log(commentsArray);
+
 
   } catch (err) {
-    // console.log(err);
+
     page.title.innerHTML = '';
     page.title.style.fontSize = '2em';
     page.body.innerHTML = (rL == 'right') ? '<p class="shrug">🙍</p>'  :
@@ -144,8 +142,8 @@ function fillComments(page) {
   if (commentsBody!=undefined) {
     commentsBody.innerHTML = '';
   }
-
-  if (commentsArray[page]!=undefined) { // fill comments
+  console.log(commentsArray)
+  if (commentsArray[page]!=undefined && commentsArray[page].length > 0) { // fill comments if there are comments
     commentsArray[page].forEach(comment => {
       commentsBody.innerHTML += '<div class="comment"><div class="comment-body">' + comment.comment + '</div><div class="comment-author">' + comment.name + '</div><div class="comment-date">' + comment.date + '</div></div>';
     });
@@ -158,7 +156,11 @@ function fillComments(page) {
     // if (commentsLeaflet.style.zIndex == -1) {
     //   commentsLeaflet.style.zIndex = 1000;
     // }
-    console.log();
+    if (commentsLeaflet.classList.contains('up')) {
+      commentsLeaflet.classList.remove('up');
+      commentsLeaflet.classList.add('down');
+    } // this it to get rid of the blocking comemnt slip- could add a class just to zIndex it
+    
   } else {
     if (commentsLeaflet!=undefined) {
       if (commentsLeaflet.classList.contains('some')) {
@@ -167,17 +169,14 @@ function fillComments(page) {
       }
       if (commentsLeaflet.classList.contains('up')) {
         setTimeout(function(){ //stops immediate disappear
-          if (commentsLeaflet.classList.contains('up')) {
-            commentsLeaflet.classList.remove('up');
-            commentsLeaflet.classList.add('down');
-            // commentsLeaflet.classList.add('unclickable');
-            // commentsLeaflet.style.zIndex = -1;
-          } // this it to get rid of the blocking comemnt slip- could add a class just to zIndex it
+          commentsLeaflet.classList.remove('up');
+          commentsLeaflet.classList.add('down');
 
         },1000);
 
       }
     }
+
   }
   // } else {
   //   if (commentsLeaflet!=undefined) {

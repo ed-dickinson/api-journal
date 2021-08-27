@@ -8,6 +8,7 @@ var Issue = new Schema({
   emoji: String,
   date: Date,
   content: String,
+  author: {type: Schema.Types.ObjectId, ref: 'User'},
   published: Boolean,
   comments: [{ comment: {type: String, minLength: 1},
             name: String,

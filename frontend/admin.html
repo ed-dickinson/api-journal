@@ -10,39 +10,52 @@
 <link rel="icon" href="">
 <link rel='stylesheet' href='journal.css' />
 <style>
+textarea {font-family: inherit;}
 
+form.issue-form {width: 330px; height: 440px; box-shadow: 0px 0px 5px grey; border: 1px solid grey; position: relative;}
+/* form [name="title"], */
+/* form [name="emoji"],  */
+form [name="content"]
+{display: block; margin: 5px; width: calc(100% - 17px); height: calc(100% - 100px);}
+
+input[name="title"] {font-size: 1em; width: calc(100% - 4em); margin: 5px;}
+input[name="emoji"] {width: 1em; font-size: 2em; padding: 0; border: 0; margin-top: 10px;}
 </style>
 
-</head>no: Number,
-title: String,
-emoji: String,
-date: Date,
-content: String,
-published: Boolean,
+</head>
 <body>
 <main class='admin'>
+  <form onsubmit="newUser();return false"
+  method="POST" class="new-user-form" id="new-user-form">New user:
+    <input name="email" type="text" value="" placeholder="email"/>
+    <input name="password" type="text" value="" placeholder="password"/>
+    <button>Submit</button>
+  </form>
+
 <!-- <div class='centerer'> -->
 <!-- action="upload()" -->
     <form
-    action="http://localhost:3000/issues/new"
+    action="http://localhost:3000/issues/new" onsubmit="upload();return false"
     method="POST" class="issue-form" id="write-form">
 
-      <input hidden name="no" type="text" value=""/>
-      <label for="title">Title:</label>
-      <input name="title" type="text" value=""/>
+      <!-- <input hidden name="no" type="text" value=""/> -->
+      <!-- <label for="title"></label> --><div>
+      <input name="title" type="text" value="" placeholder="Title"/>
 
-      <label for="emoji">Emoji:</label>
-      <input name="emoji" type="text" value="" maxLength=1/>
-      <textarea name="content" type="textarea" placeholder="" required="true"/></textarea>
+      <!-- <label for="emoji"></label> -->
+      <input name="emoji" type="text" value="" placeholder="🤔"maxLength=1/></div>
+      <textarea name="content" type="textarea" placeholder="Content" required="true"/></textarea>
       <label for="published">Publish?</label>
       <!-- <span name="published" class='published-checkbox'></span> -->
-      <input type="checkbox" name="published">
+      <input type="checkbox" name="published" value='off' onclick="checkbox()">
+
 
 
 
       <button class="send-button">Post</button>
     </form>
-    <button onclick="upload()">fetch</button>
+    <div class='response'></div>
+    <!-- <button onclick="upload()">fetch</button> -->
     <button onclick="cl()">console.log</button>
 
 </main>
@@ -50,31 +63,40 @@ published: Boolean,
 <script src="pages.js"></script> -->
 <script>
 
-const directory = 'http://localhost:3000/issues/new';
+function checkbox(){
+  if (event.target.value == 'off') {
+    event.target.value = 'on';
+  } else {
+    event.target.value = 'off';
+  }
+}
+
+const directory = 'http://localhost:3000/';
+const responseBox = document.querySelector('.response');
+
 function dom(query) {
   return document.querySelector(query).value;
 }
 
 function cl() {
-  let data = { no: 8,
+  let data = { no: 9,
     title: dom('[name=title]'),
     emoji: dom('[name=emoji]'),
     content: dom('[name=content]'),
-    published: (dom('[name=published]')=='true' ? true : false)
+    published: (dom('[name=published]'))
   };
   console.log(JSON.stringify(data));
 }
 
-function upload() {
-  let data = { no: 8,
-    title: dom('[name=title]'),
-    emoji: dom('[name=emoji]'),
-    content: dom('[name=content]'),
-    published: (dom('[name=published]')=='true' ? true : false)
+function newUser() {
+  let data = {
+    email: dom('[name=email]'),
+    password: dom('[name=password]')
+    // joined: new Date()
   };
   // console.log(document.querySelector('[name=published]'))
   // console.log(data);
-  fetch(directory, {
+  fetch(directory + 'users/new', {
     method: 'POST', // or 'PUT'
     headers: {
       'Content-Type': 'application/json',
@@ -82,7 +104,49 @@ function upload() {
     mode: 'cors',
     body: JSON.stringify(data),
   })
-  .then(response => response.json())
+  .then(response => {
+    response.json();
+    console.log(response)
+    if (response.ok) {
+      responseBox.innerHTML = 'New user created!';
+    } else {
+      responseBox.innerHTML = response.statusText;
+    }
+  })
+  .then(data => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
+
+function upload() {
+  let data = { no: 8,
+    title: dom('[name=title]'),
+    emoji: dom('[name=emoji]'),
+    content: dom('[name=content]'),
+    published: (dom('[name=published]'))
+  };
+  // console.log(document.querySelector('[name=published]'))
+  // console.log(data);
+  fetch(directory + 'issues/new', {
+    method: 'POST', // or 'PUT'
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    mode: 'cors',
+    body: JSON.stringify(data),
+  })
+  .then(response => {
+    response.json();
+    console.log(response)
+    if (response.ok) {
+      responseBox.innerHTML = 'Post submitted!';
+    } else {
+      responseBox.innerHTML = response.statusText;
+    }
+  })
   .then(data => {
     console.log('Success:', data);
   })

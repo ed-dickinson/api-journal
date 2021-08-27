@@ -66,22 +66,23 @@ exports.new = (req, res, next) => {
   //   date: new Date(),
   //   content: 'test content',
   //   published: false
-  let importedIssue = issuesImp[4];
-  // let importedIssue = req.body;
+  // let importedIssue = issuesImp[4];
+  let importedIssue = req.body;
   const issue = new Issue({
     no: importedIssue.no,
     title: importedIssue.title,
     emoji: importedIssue.emoji,
     date: new Date(),
     content: importedIssue.content,
-    published: false,
+    published: importedIssue.published == 'on' ? true : false,
     comments: importedIssue.comments
   }).save(err => {
     if (err) return next(err)
                 // res.redirect('user/' + req.body.username);
 
   })
-  res.render('index', { title: 'new issue added!' });
+  // res.render('index', { title: 'new issue added!' });
+  return res.json({message:'success'})
 };
 
 exports.get_issue = (req,res,next) => {
